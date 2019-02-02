@@ -46,3 +46,8 @@ Steps :
     destination : 0.0.0.0/0
     target : igw
 5. Associate your subnets to route table
+
+
+### Generalizing Templates
+1. To Generalize Templates we can use parameters
+2. Identify specifics in your template
