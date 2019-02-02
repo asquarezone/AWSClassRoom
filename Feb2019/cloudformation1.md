@@ -25,7 +25,7 @@
 
 ### Create a Template for the following
 
-* Lets Create manually on UI
+#### Lets Create manually on UI
       * Region => Mumbai
       * CIDR  => 192.168.0.0/16
       * Subnets => 2 Subnets
