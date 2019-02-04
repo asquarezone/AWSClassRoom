@@ -51,3 +51,4 @@ Steps :
 ### Generalizing Templates
 1. To Generalize Templates we can use parameters
 2. Identify specifics in your template
+
