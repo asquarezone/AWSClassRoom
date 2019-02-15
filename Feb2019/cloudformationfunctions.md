@@ -31,3 +31,8 @@
 
     { "Fn::Split": [ ":" , "1:2:3" ] }
     ```
+
+
+    ### Return Values of any Cloud Formation Resource
+    * Ref: This will return only ids
+    * Attributes: Extra details apart from id (Refer Return Values Section ). This works when you use function Fn::GetAtt
