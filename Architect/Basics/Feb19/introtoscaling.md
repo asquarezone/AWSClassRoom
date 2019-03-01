@@ -10,7 +10,7 @@
 
    * Other kind of scaling is called as horizontal scaling
    * you dont change size but you add one/more ec2 instances
-   * Concept: Auto Scaling Group
+   * Concept: Auto Scaling Group, Load balancer, Target Groups
 
 * Other Areas:
    * Every Ec2 machine machine has an ip address 
@@ -20,6 +20,8 @@
         * private ip doesnt change
         * public ip changes
         * if you dont want to change public ip (Elastic IP) => EC2
+
+    
 
 
         A  => 
