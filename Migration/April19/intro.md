@@ -60,3 +60,8 @@
     ```
     vagrant up
     ```
+	
+	
+	
+### Migration Overview of AWS
+![Preview](./Images/migration.png)
