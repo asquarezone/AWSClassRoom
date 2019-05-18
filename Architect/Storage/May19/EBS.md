@@ -10,5 +10,7 @@
                 * Backup of Volume 
         * Add a volume to existing instance
             * [Refer](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html)
-            
+
     * create a windows ec2 machine (t2.micro) in any region
+
+![Preview](./images/EBS.png)
