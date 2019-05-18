@@ -14,3 +14,8 @@
     * create a windows ec2 machine (t2.micro) in any region
 
 ![Preview](./images/EBS.png)
+
+* Instance-Storage: 
+    * Harddisk from the same physical server 
+    * Can never be Root Volume
+    * Instance Store is supported only by few instance types
