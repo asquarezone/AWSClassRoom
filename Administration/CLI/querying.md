@@ -14,7 +14,7 @@
 ```
 aws ec2 describe-security-groups
 ```
-    [Response](./outputs/response1.json)
+[Response](./outputs/response1.json)
 
 2. Get all the Security Grouo Names
 ```
