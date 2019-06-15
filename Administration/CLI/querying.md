@@ -9,10 +9,14 @@
 ### Conditions
 * Ensure Output format option is set to json
 
+### Useful links
+1. http://jsonviewer.stack.hu/
+2. http://jmespath.org/tutorial.html
+
 ## Basics
 1. Query
 ```
-aws ec2 describe-security-groups
+aws ec2 describe-security-groups 
 ```
 [Response](./outputs/response1.json)
 
