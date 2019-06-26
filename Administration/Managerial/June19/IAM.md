@@ -6,4 +6,4 @@
 * Roles
 * Policies
 
-![Preview](./images/Policy.png)
+![Preview](./Images/Policy.png)
