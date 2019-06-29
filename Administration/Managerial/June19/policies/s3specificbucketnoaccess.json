@@ -1,0 +1,10 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Resource": "arn:aws:s3:::qt-s3-iam-practice",
+            "Effect": "Deny",
+            "Action": "*"           
+        }
+    ]
+}

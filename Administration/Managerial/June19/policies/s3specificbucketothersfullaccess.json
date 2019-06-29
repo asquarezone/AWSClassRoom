@@ -1,0 +1,16 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Resource": "arn:aws:s3:::qt-s3-iam-practice",
+            "Effect": "Allow",
+            "Action": "*"           
+        },
+        {
+            "Resource": "arn:aws:s3:::*",
+            "Effect": "Allow",
+            "Action": "*"
+
+        }
+    ]
+}
