@@ -2,15 +2,20 @@
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Resource": "arn:aws:s3:::qt-s3-iam-practice",
+            "NotResource": "arn:aws:s3:::qt-s3-iam-practice",
             "Effect": "Deny",
-            "Action": "*"           
+            "NotAction": "*"           
         },
         {
-            "Resource": "arn:aws:s3:::*",
+            "Resource": "arn:aws:s3:::qt-s3-iam-practice",
             "Effect": "Allow",
             "Action": "*"
 
+        },
+        {
+            "Resource": "*",
+            "Action":["ec2:*","rds:*"],
+            "Effect":"Allow"
         }
     ]
 }
