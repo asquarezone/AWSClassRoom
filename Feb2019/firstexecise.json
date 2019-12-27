@@ -1,0 +1,253 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Network as demonstrated in Feb1-2019",
+    "Resources": {
+        "TorrentVpc": {
+            "Type": "AWS::EC2::VPC",
+            "Properties": {
+                "CidrBlock": "192.168.0.0/16",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "TorenrtVpc"
+                    }
+                ]
+            }
+        },
+        "excwebnet": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "ap-south-1a",
+                "VpcId": {
+                    "Ref": "TorrentVpc"
+                },
+                "CidrBlock": "192.168.0.0/24",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Excwebnet"
+                    }
+                ]
+            }
+        },
+        "excappnet": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "ap-south-1a",
+                "VpcId": {
+                    "Ref": "TorrentVpc"
+                },
+                "CidrBlock": "192.168.1.0/24",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Excappnet"
+                    }
+                ]
+            }
+        },
+        "excdatanet": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "ap-south-1a",
+                "VpcId": {
+                    "Ref": "TorrentVpc"
+                },
+                "CidrBlock": "192.168.2.0/24",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Excdatanet"
+                    }
+                ]
+            }
+        },
+        "excmngtnet": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "ap-south-1a",
+                "VpcId": {
+                    "Ref": "TorrentVpc"
+                },
+                "CidrBlock": "192.168.3.0/24",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Excmngtnet"
+                    }
+                ]
+            }
+        },
+        "Excigw": {
+            "Type": "AWS::EC2::InternetGateway",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "ExcIGW"
+                    }
+                ]
+            }
+        },
+        "AttachGateway": {
+            "Type": "AWS::EC2::VPCGatewayAttachment",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "TorrentVpc"
+                },
+                "InternetGatewayId": {
+                    "Ref": "Excigw"
+                }
+            }
+        },
+        "ExcPublicroutTable": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "TorrentVpc"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "ExcPublicRT"
+                    }
+                ]
+            }
+        },
+        "ExcPublicrout": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "ExcPublicroutTable"
+                },
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "Excigw"
+                }
+            }
+        },
+        "ExcPrivateroutTable": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "TorrentVpc"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "ExcPrivateRT"
+                    }
+                ]
+            }
+        },
+        "ExcwebRTasso": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "excwebnet"
+                },
+                "RouteTableId": {
+                    "Ref": "ExcPublicroutTable"
+                }
+            }
+        },
+        "ExcmngtRTasso": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "excmngtnet"
+                },
+                "RouteTableId": {
+                    "Ref": "ExcPublicroutTable"
+                }
+            }
+        },
+        "ExcappRTasso": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "excappnet"
+                },
+                "RouteTableId": {
+                    "Ref": "ExcPrivateroutTable"
+                }
+            }
+        },
+        "ExpdataRTasso": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "excdatanet"
+                },
+                "RouteTableId": {
+                    "Ref": "ExcPrivateroutTable"
+                }
+            }
+        },
+        "SGName": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Own security group",
+                "VpcId": {
+                    "Ref": "TorrentVpc"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "FSG"
+                    }
+                ]
+            }
+        },
+        "Fserver": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "KeyName": "mumbai",
+                "ImageId": "ami-5b673c34",
+                "InstanceType": "t2.micro",
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": true,
+                        "DeviceIndex": "0",
+                        "SubnetId": {
+                            "Ref": "excwebnet"
+                        },
+                        "GroupSet": [
+                            {
+                                "Ref": "SGName"
+                            }
+                        ]
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Firstserver"
+                    }
+                ]
+            }
+        },
+        "Sndserver": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "KeyName": "mumbai",
+                "ImageId": "ami-0d773a3b7bb2bb1c1",
+                "InstanceType": "t2.micro",
+                "SecurityGroupIds": [
+                    {
+                        "Ref": "SGName"
+                    }
+                ],
+                "SubnetId": {
+                    "Ref": "excappnet"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Secondserver"
+                    }
+                ]
+            }
+        }
+    }
+}
